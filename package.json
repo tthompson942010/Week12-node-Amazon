@@ -1,0 +1,24 @@
+{
+  "name": "week12-amazon-app",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "BamazonCustomer.js",
+  "dependencies": {
+    "mysql": "^2.11.1",
+    "inquirer": "^1.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tthompson942010/Week12-node-Amazon.git"
+  },
+  "author": "trevor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tthompson942010/Week12-node-Amazon/issues"
+  },
+  "homepage": "https://github.com/tthompson942010/Week12-node-Amazon#readme"
+}
