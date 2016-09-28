@@ -3,7 +3,7 @@ const mysql = require("mysql");
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: 3306,
+    port: "3306",
     user: "root", 
     password: "",
     database: "bamazon"
@@ -21,9 +21,9 @@ var Purchase = function(){
 
 
 
-	console.log("Welcome to Bamazon! If you would like to place an order, pleasse find the id of the item you wish to purchase from the table below.")
+	console.log("Welcome to Bamazon! If you would like to place an order, please find the id of the item you wish to purchase from the table below.")
 	console.log("Here's our current inventory.");
-	connection.query("SELECT * from bamazon.products", function(err, res){
+	connection.query("SELECT * from products;", function(err, res){
 			  if (err) {
 	    console.log("Error!" + err);
 	    return;
@@ -56,21 +56,19 @@ var buySomething = function(){
 
 		}
 		else{
-			console.log(item)
-			connection.query("SELECT `stockquantity` FROM `products` WHERE ?",{
+			// console.log(item)
+			connection.query("SELECT * FROM `products` WHERE ?;",{
 				id: item
 			}, function(err, res){
-				var stock = res;
+				var stock = res[0].stockquantity;
+				console.log(res[0].stockquantity);
 				if(number > stock){
 					console.log("We're sorry, we don't have enough of that item in stock.")
 					buySomething();
 				} else{
-					console.log(stock);
-					connection.query("UPDATE `products` SET `stockquantity` = (`stockquantity` - ?) WHERE `id` = ?",[{
-						number
-					},{
-						item
-					}], function(err, res) {});
+					stock = stock - number;
+					// console.log(stock);
+					connection.query("UPDATE `products` SET `stockquantity` = ? WHERE `id` = ?;",[stock, item], function(err, res) {});
 					console.log(res);
 					console.log("Thank you for your purchase!");
 					buySomething();
